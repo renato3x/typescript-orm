@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "Node16",
+    "lib": ["ES2023"],
+    "rootDir": ".",
+    "baseUrl": ".",
+    "outDir": "dist",
+    "removeComments": true,
+    "noEmitOnError": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": false,
+    "allowJs": true,
+    "paths": {
+      "@decorators/*": ["src/decorators/*"],
+      "@database/*": ["src/database/*"],
+      "@database": ["src/database"],
+      "@knexfile": ["knexfile"]
+    },
+    "typeRoots": [
+      "node_modules/@types",
+      "src/@types",
+    ]
+  },
+  "exclude": [
+    "src/**/*.d.ts"
+  ]
+}

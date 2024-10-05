@@ -1,0 +1,21 @@
+services:
+  server:
+    build: .
+    environment:
+      - DATABASE_HOST=database
+      - DATABASE_PORT=5432
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root
+      - DATABASE_NAME=orm
+    depends_on:
+      - database
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=orm
+    volumes:
+      - db-volume:/var/lib/postgresql/data
+volumes:
+  db-volume:

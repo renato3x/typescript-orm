@@ -1,0 +1,34 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ],
+    ["@babel/preset-typescript"]
+  ],
+  "plugins": [
+    [
+      "inline-dotenv",
+      {
+        "path": "./.env"
+      }
+    ],
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@decorators": "./src/decorators",
+          "@database": "./src/database",
+          "@knexfile": "./knexfile"
+        }
+      }
+    ]
+  ],
+  "ignore": [
+    "**/*.d.ts"
+  ]
+}
