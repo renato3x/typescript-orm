@@ -9,7 +9,15 @@ export async function initializeEntities(entities: ClassType[]) {
 
     if (!tableExists) {
       await db.schema.createTable(tableName, (table) => {
-        table.increments('id').primary();
+        const columns = (Reflect.getMetadata('columns', entity) || []) as Column[];
+
+        columns.forEach((column) => {
+          const col = table[column.type](column.name);
+
+          if (column.primary) {
+            col.primary();
+          }
+        });
       });
     }
   }
