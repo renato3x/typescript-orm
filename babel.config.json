@@ -21,9 +21,10 @@
       "module-resolver",
       {
         "alias": {
+          "@database": "./src/database/index",
+          "@knexfile": "./knexfile",
           "@decorators": "./src/decorators",
-          "@database": "./src/database",
-          "@knexfile": "./knexfile"
+          "@entities": "./src/entities"
         }
       }
     ]

@@ -1,4 +1,10 @@
 import knex from 'knex';
 import config from '@knexfile';
+import { initializeEntities } from './initialize-entities';
 
-export const db = knex(config);
+const db = knex(config);
+
+export {
+  db,
+  initializeEntities
+}

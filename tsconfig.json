@@ -19,10 +19,10 @@
     "noImplicitReturns": false,
     "allowJs": true,
     "paths": {
+      "@database": ["src/database/index"],
+      "@knexfile": ["knexfile"],
       "@decorators/*": ["src/decorators/*"],
-      "@database/*": ["src/database/*"],
-      "@database": ["src/database"],
-      "@knexfile": ["knexfile"]
+      "@entities/*": ["src/entities/*"]
     },
     "typeRoots": [
       "node_modules/@types",
