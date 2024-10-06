@@ -1,12 +1,13 @@
 import { Column } from '@decorators/column';
 import { Entity } from '@decorators/entity';
+import { Id } from '@decorators/id';
 
 @Entity({ name: 'products' })
 export class Product {
-  @Column({ type: 'increments', primary: true, name: 'product_id' })
+  @Id()
   private id!: number;
 
-  @Column({ name: 'product_name', type: 'string' })
+  @Column({ type: 'string' })
   private name!: string;
 
   @Column({ type: 'float' })

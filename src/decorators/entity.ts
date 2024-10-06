@@ -7,6 +7,6 @@ interface EntityOptions {
 export function Entity<T extends ClassType>(options?: EntityOptions) {
   return function(target: T) {
     const tableName = options?.name || target.name.toLowerCase();
-    Reflect.defineMetadata('tableName', tableName, target);
+    Reflect.defineMetadata('table:name', tableName, target);
   }
 }

@@ -1,8 +1,9 @@
-declare type ColumnType = 'string' | 'integer' | 'float' | 'boolean' | 'timestamp' | 'increments';
+declare type ColumnBaseType = 'string' | 'integer' | 'float' | 'boolean' | 'timestamp';
+declare type Id = 'increments';
 
 declare interface Column {
   name: string;
-  type: ColumnType;
+  type: ColumnBaseType | Id;
   propertyKey: string;
   primary?: boolean;
 }
