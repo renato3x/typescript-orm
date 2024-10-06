@@ -1,19 +1,19 @@
 import { Column } from '@decorators/column';
 import { Entity } from '@decorators/entity';
 import { Id } from '@decorators/id';
+import { Repository } from '@database';
 
 @Entity()
-export class User {
+export class User extends Repository {
   @Id({ name: 'user_id' })
-  @Column({ type: 'integer', name: 'userId' })
-  private id!: number;
+  public id!: number;
 
   @Column({ type: 'string' })
-  private name!: string;
+  public name!: string;
 
   @Column({ type: 'string' })
-  private email!: string;
+  public email!: string;
 
   @Column({ type: 'timestamp' })
-  private createdAt!: Date;
+  public createdAt!: Date;
 }

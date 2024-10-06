@@ -18,6 +18,7 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": false,
     "allowJs": true,
+    "noImplicitAny": false,
     "paths": {
       "@database": ["src/database/index"],
       "@knexfile": ["knexfile"],

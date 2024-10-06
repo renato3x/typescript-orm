@@ -1,12 +1,7 @@
 import { initializeEntities } from '@database';
-import { Product } from '@entities/product';
 import { User } from '@entities/user';
 
-async function main() {
-  await initializeEntities([
-    User,
-    Product
-  ]);
-}
-
-main();
+initializeEntities([User]).then(async () => {
+  const users = await User.findAll();
+  console.log(users[0].email);
+});
