@@ -11,9 +11,6 @@ export async function initializeEntities(entities: ClassType[]) {
       await db.schema.createTable(tableName, (table) => {
         const columns = (Reflect.getMetadata('table:columns', entity) || []) as Column[];
 
-
-        console.log(`Columns for ${tableName}: ${JSON.stringify(columns, null, 2)}`);
-
         columns.forEach((column) => {
           const col = table[column.type](column.name);
 
