@@ -29,7 +29,4 @@
       "src/@types",
     ]
   },
-  "exclude": [
-    "src/**/*.d.ts"
-  ]
 }
