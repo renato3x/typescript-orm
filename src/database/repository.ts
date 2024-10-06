@@ -19,8 +19,24 @@ export class Repository {
     return (Reflect.getMetadata('table:columns', this) || []) as Column[];
   }
 
+  async save(): Promise<void> {
+    const mappedData = this.columns.reduce((final, column) => {
+      final[column.name] = this[column.propertyKey];
+      return final;
+    }, {} as AnyObject);
+
+    await db(this.tableName)
+      .insert(mappedData)
+      .returning('*')
+      .then(([ value ]) => {
+        this.columns.forEach((column) => {
+          this[column.propertyKey] =  value[column.name];
+        })
+      });
+  }
+
   static async findAll<T extends Repository>(
-    this: { new (): T; } & typeof Repository
+    this: { new (...args: any[]): T; } & typeof Repository
   ): Promise<T[]> {
     const tableName = this.getTableName();
     const columns = this.getColumns();
@@ -42,7 +58,7 @@ export class Repository {
   }
 
   static async findOne<T extends Repository>(
-    this: { new (): T; } & typeof Repository,
+    this: { new (...args: any[]): T; } & typeof Repository,
     options: FindOneOptions<T>
   ): Promise<T | null> {
     const tableName = this.getTableName();
