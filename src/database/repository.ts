@@ -1,6 +1,5 @@
 import 'reflect-metadata';
 import { db } from '@database';
-import { Knex } from 'knex';
 
 export class Repository {
   private get tableName(): string {
@@ -20,18 +19,55 @@ export class Repository {
   }
 
   async save(): Promise<void> {
+    const idColumn = this.columns.find((column) => column.type === 'increments') as Column;
+
     const mappedData = this.columns.reduce((final, column) => {
       final[column.name] = this[column.propertyKey];
       return final;
     }, {} as AnyObject);
 
-    await db(this.tableName)
-      .insert(mappedData)
-      .returning('*')
-      .then(([ value ]) => {
-        this.columns.forEach((column) => {
-          this[column.propertyKey] =  value[column.name];
+    if (!this[idColumn.propertyKey]) {
+      await db(this.tableName)
+        .insert(mappedData)
+        .returning('*')
+        .then(([ value ]) => {
+          this.columns.forEach((column) => {
+            this[column.propertyKey] =  value[column.name];
+          })
+        });
+      
+      return;
+    } else {
+      await db(this.tableName)
+        .update({
+          ...mappedData,
+          [idColumn.name]: undefined,
         })
+        .where({
+          [idColumn.name]: this[idColumn.propertyKey],
+        })
+        .returning('*')
+        .then(([ value ]) => {
+          this.columns.forEach((column) => {
+            this[column.propertyKey] =  value[column.name];
+          })
+        });
+    }
+  }
+
+  async remove(): Promise<void> {
+    const where = this.columns.reduce((final, column) => {
+      final[column.name] = this[column.propertyKey]
+
+      return final;
+    }, {} as AnyObject);
+
+    await db(this.tableName)
+      .delete()
+      .where(where)
+      .then(() => {
+        const idColumn = this.columns.find((column) => column.type === 'increments')?.propertyKey as string;
+        delete this[idColumn];
       });
   }
 
