@@ -30,7 +30,7 @@ Example usage:
 
 ```typescript
 @Entity('users')
-class User {
+class User extends Repository {
   // some code here...
 }
 ```
@@ -50,7 +50,7 @@ Example usage:
 
 ```typescript
 @Entity('users')
-class User {
+class User extends Repository {
   @Column({ type: 'string' })
   public name!: string;
 
@@ -69,8 +69,9 @@ Example usage:
 
 ```typescript
 @Entity('users')
-class User {
+class User extends Repository {
   @Id
+  @Column({ type: 'integer' })
   public id!: number;
 
   @Column({ type: 'string' })
@@ -96,7 +97,7 @@ Metadata manipulation is a fundamental part of the project. The repository uses 
    Reflect.defineMetadata('table:name', 'users', User);
    ```
 
-2. **Reading Metadata**: During execution, the ORM uses `Reflect.getMetadata` to read this information and dynamically build database operations. The reading of this metadata is done in the **[initialize-entities.ts](./src/database/initialize-entities.ts)** file, which defines the name, columns, and their types.
+2. **Reading Metadata**: During execution, the ORM uses `Reflect.getMetadata` to read this information and dynamically build database operations. The reading of this metadata is done in the *[initialize-entities.ts](./src/database/initialize-entities.ts)* file, which defines the name, columns, and their types.
 
    ```typescript
    const entityMeta = Reflect.getMetadata('table:name', User);
