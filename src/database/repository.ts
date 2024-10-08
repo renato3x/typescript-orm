@@ -71,6 +71,14 @@ export class Repository {
       });
   }
 
+  static async count(): Promise<number> {
+    const tableName = this.getTableName();
+    return await db(tableName)
+      .count()
+      .first()
+      .then((result) => result?.count as number);
+  }
+
   static async findAll<T extends Repository>(
     this: { new (...args: any[]): T; } & typeof Repository
   ): Promise<T[]> {
