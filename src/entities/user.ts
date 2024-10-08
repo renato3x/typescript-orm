@@ -3,9 +3,10 @@ import { Entity } from '@decorators/entity';
 import { Id } from '@decorators/id';
 import { Repository } from '@database';
 
-@Entity()
+@Entity("_users")
 export class User extends Repository {
-  @Id({ name: 'user_id' })
+  @Id
+  @Column({ type: 'integer', name: '_user_id' })
   public id!: number;
 
   @Column({ type: 'string' })

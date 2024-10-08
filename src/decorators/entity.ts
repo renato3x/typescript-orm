@@ -1,12 +1,8 @@
 import 'reflect-metadata';
 
-interface EntityOptions {
-  name?: string;
-}
-
-export function Entity<T extends ClassType>(options?: EntityOptions) {
+export function Entity<T extends ClassType>(name?: string) {
   return function(target: T) {
-    const tableName = options?.name || target.name.toLowerCase();
+    const tableName = name || target.name.toLowerCase();
     Reflect.defineMetadata('table:name', tableName, target);
   }
 }

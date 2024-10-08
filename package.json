@@ -1,12 +1,10 @@
 {
   "name": "typecript-orm",
   "version": "1.0.0",
-  "main": "dist/index",
+  "main": "src/index",
   "license": "MIT",
   "scripts": {
-    "dev": "tsx watch src",
-    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored --no-comments",
-    "start": "node dist/index"
+    "start": "tsx src/index"
   },
   "dependencies": {
     "@faker-js/faker": "^9.0.3",
@@ -16,15 +14,8 @@
     "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.25.7",
-    "@babel/core": "^7.25.7",
-    "@babel/node": "^7.25.7",
-    "@babel/preset-env": "^7.25.7",
-    "@babel/preset-typescript": "^7.25.7",
     "@types/knex": "^0.16.1",
     "@types/node": "^22.7.4",
-    "babel-plugin-inline-dotenv": "^1.7.0",
-    "babel-plugin-module-resolver": "^5.0.2",
     "tsx": "^4.19.1",
     "typescript": "^5.6.2"
   }

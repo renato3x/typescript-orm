@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:lts
 
 RUN mkdir /app
 
@@ -9,7 +9,5 @@ COPY package.json ./
 RUN yarn
 
 COPY . .
-
-RUN yarn build
 
 CMD ["yarn", "start"]
